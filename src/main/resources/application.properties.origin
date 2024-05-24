@@ -1,0 +1,9 @@
+spring.application.name=sensor
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/aleksandr?currentSchema=weather_data
+spring.datasource.username=aleksandr
+spring.datasource.password=0041
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.show_sql=true
