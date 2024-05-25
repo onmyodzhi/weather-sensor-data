@@ -25,6 +25,6 @@ public class Sensor {
     @Size(min = 3, max = 30, message = "Field name should be between 3 to 30 characters")
     private String name;
 
-    @OneToOne(mappedBy = "sensorId")
+    @OneToOne(mappedBy = "sensor")
     private Measurement measurement;
 }

@@ -39,5 +39,5 @@ public class Measurement {
     @NotNull
     @OneToOne
     @JoinColumn(name = "sensor_id")
-    private Sensor sensorId;
+    private Sensor sensor;
 }

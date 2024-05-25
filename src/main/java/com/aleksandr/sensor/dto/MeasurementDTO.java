@@ -23,5 +23,5 @@ public class MeasurementDTO {
 
     @NotNull
     @OneToOne
-    private Sensor sensorId;
+    private Sensor sensor;
 }

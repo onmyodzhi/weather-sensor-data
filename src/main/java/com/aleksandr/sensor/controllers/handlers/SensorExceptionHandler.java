@@ -1,34 +1,18 @@
 package com.aleksandr.sensor.controllers.handlers;
 
-import com.aleksandr.sensor.until.*;
+import com.aleksandr.sensor.until.BadRequestException;
+import com.aleksandr.sensor.until.SensorErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
+@Slf4j
 public class SensorExceptionHandler {
-
-    @ExceptionHandler(SensorAlreadyExistException.class)
-    public ResponseEntity<SensorErrorResponse> handleSensorAlreadyExistException(SensorAlreadyExistException e) {
-        SensorErrorResponse response = new SensorErrorResponse(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(SensorNameIsShortException.class)
-    public ResponseEntity<SensorErrorResponse> handleSensorNameIsShortException(SensorNameIsShortException e) {
-        SensorErrorResponse response = new SensorErrorResponse(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(SensorNameIsLongException.class)
-    public ResponseEntity<SensorErrorResponse> handleSensorNameIsLongException(SensorNameIsLongException e) {
-        SensorErrorResponse response = new SensorErrorResponse(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(SensorNameIsEmptyException.class)
-    public ResponseEntity<SensorErrorResponse> handleSensorNameIsEmptyException(SensorNameIsEmptyException e) {
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<SensorErrorResponse> handleSensorAlreadyExistException(BadRequestException e) {
         SensorErrorResponse response = new SensorErrorResponse(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
