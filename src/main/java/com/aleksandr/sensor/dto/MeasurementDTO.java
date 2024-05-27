@@ -22,6 +22,5 @@ public class MeasurementDTO {
     private Boolean raining;
 
     @NotNull
-    @OneToOne
-    private Sensor sensor;
+    private SensorDTO sensor;
 }

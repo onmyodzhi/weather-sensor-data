@@ -23,8 +23,8 @@ public class Measurement {
     private Long id;
 
     @Column(name = "value")
-    @Min(value = -99)
-    @Max(value = 99)
+    @Min(value = -100)
+    @Max(value = 100)
     @NotNull
     private Double value;
 
@@ -37,7 +37,7 @@ public class Measurement {
     private LocalDateTime timeToFix;
 
     @NotNull
-    @OneToOne
-    @JoinColumn(name = "sensor_id")
+    @ManyToOne
+    @JoinColumn(name = "sensor", referencedColumnName = "name")
     private Sensor sensor;
 }

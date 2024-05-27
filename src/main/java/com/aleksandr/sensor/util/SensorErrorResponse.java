@@ -1,4 +1,4 @@
-package com.aleksandr.sensor.until;
+package com.aleksandr.sensor.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

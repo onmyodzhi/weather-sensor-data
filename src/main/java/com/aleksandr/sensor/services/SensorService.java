@@ -1,11 +1,11 @@
 package com.aleksandr.sensor.services;
 
 import com.aleksandr.sensor.dto.SensorDTO;
-import com.aleksandr.sensor.dto.mapping.SensorMapping;
 import com.aleksandr.sensor.model.Sensor;
 import com.aleksandr.sensor.repositories.SensorRepository;
-import com.aleksandr.sensor.until.SensorAlreadyExistException;
+import com.aleksandr.sensor.util.SensorAlreadyExistException;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,15 @@ public class SensorService {
 
     private final SensorRepository sensorRepository;
 
-    private final SensorMapping sensorMapping;
+    private final ModelMapper modelMapper;
+
+    public Sensor convertToSensor(SensorDTO sensorDTO) {
+        return modelMapper.map(sensorDTO, Sensor.class);
+    }
+
+    public SensorDTO convertToSensorDTO(Sensor sensor) {
+        return modelMapper.map(sensor, SensorDTO.class);
+    }
 
     @Transactional
     public void save(SensorDTO sensorDTO) {
@@ -26,14 +34,17 @@ public class SensorService {
             throw new SensorAlreadyExistException("Sensor with name " + sensorDTO.getName() + " already exists");
         }
 
-        Sensor sensor = sensorMapping.convertToSensor(sensorDTO);
+        Sensor sensor = convertToSensor(sensorDTO);
 
         sensorRepository.save(sensor);
+    }
+
+    public Sensor getBySensorName(String name) {
+        return sensorRepository.getSensorByName(name);
     }
 
     public boolean sensorExists(String sensorName) {
         return sensorRepository.existsSensorByName(sensorName);
     }
-
 
 }

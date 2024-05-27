@@ -7,13 +7,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "sensor")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,4 @@ public class Sensor {
     @NotBlank(message = "Filed name should not be empty")
     @Size(min = 3, max = 30, message = "Field name should be between 3 to 30 characters")
     private String name;
-
-    @OneToOne(mappedBy = "sensor")
-    private Measurement measurement;
 }
